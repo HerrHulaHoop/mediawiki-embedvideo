@@ -32,6 +32,9 @@ class VideoTransformOutput extends \MediaTransformOutput {
 		$this->lang = false;
 		$this->page = $parameters['page'];
 		$this->url = $file->getFullUrl();
+		$this->autoplay = isset($parameters['autoplay']);
+		$this->loop = isset($parameters['loop']);
+		$this->controls = isset($parameters['controls']);
 	}
 
 	/**
@@ -90,7 +93,7 @@ class VideoTransformOutput extends \MediaTransformOutput {
 			}
 		}
 
-		$html = "<video src='{$this->url}" . ($inOut !== false ? '#t=' . implode(',', $inOut) : '') . "' width='{$this->getWidth()}' height='{$this->getHeight()}'" . (!empty($class) ? " class='{$class}'" : "") . (!empty($style) ? " style='" . implode(" ", $style) . "'" : "") . " controls><a href='{$parameters['descriptionUrl']}'>{$parameters['descriptionUrl']}</a></video>";
+		$html = "<video src='{$this->url}" . ($inOut !== false ? '#t=' . implode(',', $inOut) : '') . "' width='{$this->getWidth()}' height='{$this->getHeight()}'" . (!empty($class) ? " class='{$class}'" : "") . (!empty($style) ? " style='" . implode(" ", $style) . "'" : "") . ($this->autoplay ? " autoplay" : "") . ($this->loop ? " loop" : "") . ($this->controls ? " controls" : "") . " ><a href='{$parameters['descriptionUrl']}'>{$parameters['descriptionUrl']}</a></video>";
 
 		return $html;
 	}

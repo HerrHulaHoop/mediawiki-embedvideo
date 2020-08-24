@@ -25,6 +25,15 @@ class VideoHandler extends AudioHandler {
 		if ($name === 'width' || $name === 'height') {
 			return $value > 0;
 		}
+		if ($name === 'autoplay') {
+			return true;
+		}
+		if ($name === 'loop') {
+			return true;
+		}
+		if ($name === 'controls') {
+			return true;
+		}
 		return parent::validateParam($name, $value);
 	}
 
